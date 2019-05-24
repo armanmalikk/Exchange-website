@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<section id="login-section">
+     <div class="container-fluid login-page-width main-body-container">
+        <div class="row">
+           <div class="col-sm-12 login-page-width">
+               <div class="col-sm-3">
+               </div>
+               <div class="col-sm-6 login-body">
+                  <p class="login-main-title">Contact Us</p>
+
+                  <form method="post" enctype="multipart/form-data" action="?tab=contact">
+                    {% csrf_token %}
+
+                    <div>
+                        <input type="text" name="name" placeholder="Name" class="login-email-box" required>
+                    </div>
+                    <div>
+                        <input type="email" name="email" placeholder="Your Email" class="login-email-box" required>
+                    </div>
+                    <div>
+                        <input type="text" name="subject" placeholder="Subject" class="login-email-box" required>
+                    </div>
+                    <div>
+                        <textarea type="text" name="message" placeholder="Message" class="login-email-box message-box" required></textarea>
+                    </div>
+                    <div>
+                        <input type="Submit" placeholder="Send Message" class="login-button" readonly>
+                    </div>
+
+                  </form>  
+
+               </div>
+               <div class="col-sm-3">
+               </div>
+           </div>
+        </div>
+     </div>
+</section>
+
+{% endblock %}
+
+{% block page_related_footer %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.contact-menu').addClass('active-class')
+      $(".contact-menu-mobile").addClass('mobile-class-active')
+
+      {% if request.GET.tab == 'contact' %}
+          $('.login-main-title').trigger('click')
+      {% endif %}  
+      
+    })
+  </script>
+{% endblock page_related_footer %}

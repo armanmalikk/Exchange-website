@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+
+<section id="singup-section">
+     <div class="container-fluid login-page-width main-body-container">
+        <div class="row">
+           <div class="col-sm-12 login-page-width">
+               <div class="col-sm-3">
+               </div>
+               <div class="col-sm-6 login-body">
+                  <p class="login-main-title">Register in to Biai</p>
+                  <!--<form>
+                      <div class="login-error-hide">
+                          <ul class="login-error-box">
+                             <li class="login-wrong-email">This email already exists enter new one</li>
+                             <li class="login-wrong-password">Confirm password didn't match</li>
+                          </ul>
+                      </div>
+                      <div>
+                          <input type="text" name="" placeholder="Name" class="login-email-box" required>
+                      </div>
+                      <div>
+                          <input type="email" name="" placeholder="Email Address" class="login-email-box" required>
+                      </div>
+                      <div>
+                          <input type="password" name="" placeholder="Password" class="login-password-box" required>
+                      </div>
+                      <div>
+                          <input type="password" name="" placeholder="Confirm Password" class="login-password-box" required>
+                      </div>
+                      <div>
+                          <input type="" placeholder="Register" class="login-button" readonly>
+                      </div>
+                  </form>-->
+                  <form method="post" class="login-form" novalidate>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                  <div>
+                      <span class="login-bottom-text"><a href="{% url 'login' %}">Login for Biai</a></span>
+                  </div>
+               </div>
+               <div class="col-sm-3">
+               </div>
+           </div>
+        </div>
+     </div>
+</section>
+
+{% endblock %}

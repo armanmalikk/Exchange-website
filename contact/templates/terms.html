@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<section id="terms-section">
+     <div class="container main-body-container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10 terms-bos">
+                   <p class="terms-title">Our Terms and Conditions</p>
+                   <div class="terms-list">
+                        <p class="terms-subtitle">1. Our order completed time max 5 minutes to 1 hour.</p>
+                        <p class="terms-subtitle">2. Our buy-sell and exchange rate is too low so that Paypal fee will be bear yourself.</p>
+                        <p class="terms-subtitle">3. Sometime we will ask you some personal question for inquiries of paypal buy-sell or exchange</p>
+                        <p class="terms-subtitle">4. Due payment of any transaction is not possible.</p>
+                        <p class="terms-subtitle">5. Sometimes we stop receiving some currency for to much reserve or low balance in our account.</p>
+                        <p class="terms-subtitle">6. If you want refund your paid amount 2% fee will be deducted for that.</p>
+                        <p class="terms-subtitle">7. For Bkash or Rocket or Bank Payment refund 3% fee will be deducted.</p>
+                        <p class="terms-subtitle">8. Skrill minimum order $30.</p>
+                   </div>
+                </div>
+                <div class="col-sm-1"></div>   
+            </div>
+        </div>
+     </div>
+</section>
+
+{% endblock %}
+
+{% block page_related_footer %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.tc-menu').addClass('active-class')
+      $(".tc-menu-mobile").addClass('mobile-class-active')
+    })
+  </script>
+{% endblock page_related_footer %}

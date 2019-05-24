@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+ <!--             POPUP SECTION start           -->
+ 
+<section id="onlick-traing-fixed-body">
+  <div class="container" id="onlick-traing-fixed-subbody">
+       <div>
+            <i class="far fa-times-circle popup-close"></i>
+       </div>
+       <table style="width:100%" class="popup-main-table">
+	        <tr class="popup-table-row1">
+	          <th><span class="popup-table-title">Send Amount</span></th>
+	          <th><span class="popup-table-title">From</span></th> 
+	          <th><span class="popup-table-title">Receive</span></th>
+	          <th><span class="popup-table-title">Receive Amount</span></th>
+	        </tr>
+	        <tr class="popup-table-row2">
+	          <td><span class="popup-table-text popup-first-value">00.00</span></td>
+	          <td>
+	          	<img class="second-list-img pop-fisrt-img" src="{% static 'img/Rocket.png' %}">
+	          	<span class="popup-table-text popup-img-text pop-fisrt-text">Rocket Personal</span>
+	          </td> 
+	          <td>
+	          	<img class="first-list-img pop-second-img" src="{% static 'img/perfect.png' %}">
+	          	<span class="popup-table-text popup-img-text pop-second-text">Perfect Money</span>
+	          </td>
+	          <td><span class="popup-table-text popup-second-value">00.00</span></td>
+	        </tr>
+       </table> 
+       <div>
+            <p class="transaction-title">Fill up the form for money transaction</p>
+            <!--<div class="transaction-box">
+                <p class="transaction-subtitle">Email address</p>
+                <input type="email" name="" class="transaction-input">
+            </div>
+            <div class="transaction-box">
+                <p class="transaction-subtitle">Name</p>
+                <input type="text" name="" class="transaction-input">
+            </div>
+            <div class="transaction-box" >
+                <p class="transaction-subtitle">Phone number</p>
+                <input type="number" name="" class="transaction-input">
+            </div>
+            <div class="transaction-box">
+                <button class="transaction-button">Submit</button>
+            </div>-->
+            <form method="post" class="add-student-form" enctype="multipart/form-data" action="?tab=exchanges">
+                {% csrf_token %}
+
+                <div class="transaction-box">
+                  <p class="transaction-subtitle">{{ form.name.label }}</p>
+                  <div class="transaction-input">
+                    <input type="text" name="name" required="" value="">
+                  </div> 
+                </div>
+
+                <div class="transaction-box">
+                  <p class="transaction-subtitle">{{ form.email.label }}</p>
+                  <div class="transaction-input">
+                    <input type="text" name="email" required="" value="">
+                  </div> 
+                </div>
+
+                <div class="transaction-box">
+                  <p class="transaction-subtitle">{{ form.phone.label }}</p>
+                  <div class="transaction-input">
+                    <input type="number" name="phone" required="" value="">
+                  </div> 
+                </div>
+
+                <div class="transaction-box">
+                    <input type="hidden" name="sendAmount" required="" value="" class="form-send-amount">
+
+                    <input type="hidden" name="receiveAmount" required="" value="" class="form-receive-amount">
+
+                    <input type="hidden" name="sendFrom" required="" value="" class="form-send-name">
+
+                    <input type="hidden" name="receiveFrom" required="" value="" class="form-receive-name">
+                  </div> 
+                </div>
+
+                <div class="transaction-button">
+                  {% if user.is_authenticated %}
+                     <input type="Submit" value="Submit" class="Add-student-button">
+                  {% else %}
+                     <a class="login-first-text">Login first before you post order</a>
+                     <br>
+                     <a href="{% url 'login' %}" class="login-first">Login</a> 
+                  {% endif %}   
+                </div>  
+                  
+          </form>
+       </div>        
+  </div>
+</section>
+<!--             POPUP SECTION end             -->
+   
+<!--         Body section start     -->
+<section id="second-section">
+ <div class="container main-body-container">
+    <div class="row">
+        <div class="col-sm-12">
+          <h1>{{count}}</h1>
+            <p class="exchange-main-titel main-page-title">Biai Exchanges Rate: <span class="first-chang-title">.....</span> to 
+            <span class="second-chang-title">.....</span></p>
+            <div class="col-sm-9 exchange-calculator-body">
+                <div class="col-sm-6 exchange-calculator-body-first-part">
+                    <div class="col-sm-5">
+                        <p class="calculator-title">Send Amount</p>
+                        <input type="Number" name="" class="calculator-input" placeholder="1.00">
+                    </div>
+                    <div class="col-sm-7">
+                        <p class="calculator-title">Send From</p>
+                        <ul class="first-ul-list">
+                            {% for allItem in allItems %}
+                              <form method="post">                            
+                                <li class="first-list" data-id="{{allItem.id}}" data-name="{{allItem.name}}" data-price="{{allItem.price}}">
+                                    <img class="first-list-img" src="{{ allItem.image.url }}"">
+                                    <span class="first-list-text">{{allItem.name}}</span>
+                                </li>
+                                <input type="hidden" name="{{allItem.name}}">
+                              </form>  
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 exchange-calculator-body-first-part">
+                  <div class="col-sm-7">
+                      <p class="calculator-title">Receive To</p>
+                      <div class="not-allow-title remove-the-shadow"></div>
+                        <ul class="second-ul-list">
+                              {% for allItem in allItems %}
+                                  <li class="second-list" data-name="{{allItem.name}}" data-price="{{allItem.price}}">
+                                  	<img class="second-list-img" src="{{allItem.image.url}}">
+                                  	<span class="second-list-text">{{allItem.name}}</span>
+                                  </li>
+                              {% endfor %}    
+                        </ul>  
+                  </div>
+                  <div class="col-sm-5 calculator-title">
+                      <p>Receive Amount</p>
+                      <div class="receive-amount-box">
+                          <p class="receive-amount-text">00.00</p>
+                      </div>
+                  </div>
+                </div> 
+                <div class="confirm-payment-box">
+                    <p class="confirm-payment">Confirm Payment</p> 
+                </div>    
+            </div>
+            <div class="col-sm-3 third-list-box">
+                <div> 
+                    <p class="today-rate">Today Rate</p>
+                    <ul class="third-ul-list">
+
+                      {% for allItem in allItems %}
+                        <li class="third-list">
+                        	<img class="first-list-img" src="{{allItem.image.url}}">
+                        	<span class="first-list-text">{{allItem.name}}</span>
+                        	<span class="first-list-rate">1{{allItem.weight}} = {{allItem.price}}</span>
+                        </li>
+                      {% endfor %}  
+                        
+                    </ul>
+                </div>
+                <div> 
+                    <p class="today-rate-two">Available Balance</p>
+                    <ul class="third-ul-list">
+
+                      {% for allItem in allItems %}
+                        <li class="third-list">
+                        	<img class="first-list-img" src="{{allItem.image.url}}">
+                        	<span class="first-list-text balance-title">{{allItem.name}}</span>
+                        	<span class="first-list-rate balance-amount">{{allItem.available_amount}} Gram</span>
+                        </li>
+                      {% endfor %}  
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+</section>
+
+<!--         Main body section end     -->
+<section id="tabel-section">
+ <div class="container main-body-container">
+    <div class="row">
+        <div class="col-sm-9">
+            <p class="exchange-main-titel">Latest Exchanges</p>
+            <table style="width:100%" class="exchange-table">
+                <tr class="exchange-table-row">
+                  <th><span class="table-title-text">Send</span></th>
+                  <th><span class="table-title-text">Amount</span></th>
+                  <th><span class="table-title-text">Receive</span></th> 
+                  <th><span class="table-title-text">Amount</span></th>
+                  <th><span class="table-title-text">Status</span></th>
+                  <th><span class="table-title-text">Date</span></th>
+                </tr>
+
+                {% if TransactionRequest %}
+                  {% for Transaction in TransactionRequest %}
+                    <tr class="exchange-table-row">
+                      <td>
+                      	<!--<img class="first-list-img" src="{% static 'img/perfect.png' %}">-->
+                      	<span class="first-list-text">{{Transaction.sendFrom}}</span>
+                      </td>
+                      <td><span class="table-list-text">{{Transaction.sendAmount}}</span></td>
+                      <td>
+                      	<!--<img class="second-list-img" src="{% static 'img/Rocket.png' %}">-->
+                      	<span class="second-list-text">{{Transaction.receiveFrom}}</span>
+                      </td> 
+                      <td><span class="table-list-text">{{Transaction.receiveAmount}}</span></td>
+                      <td><span class="table-list-text">{{Transaction.status}}</span></td>
+                      <td><span class="table-list-text">{{Transaction.transaction_at|date:"d-m-Y" }}</span></td>
+                    </tr>
+                  {% endfor %}
+                {% else %}
+                    <tr class="exchange-table-row">
+                      <td>
+                        <p>No Data Avaiable</p>
+                      </td>  
+                    </tr>  
+                {% endif %}     
+
+                
+            </table>
+        </div>
+        <div class="col-sm-3">
+            <p class="trust-title">100% Trusted </p>
+            <div class="trust-police-box">
+              <p class="trust-police">Welcome to Biai Bangladesh. This website just for freelancer, affiliate marketer, cpa marketer, internet advertiser & online income related members.
+              Dollar buy sell is not allowed in Bangladesh. The Bangladesh bank says “Foreign currency can be purchased or sold only through dealers or money changers authorized by Bangladesh Bank. So dollar buy sell by a person is illegal and punishable crime. We are just help our online worker to convert their small amount of dollar which is not possible to exchange or sell BDT. Their is so many people of our country whos are earn very poor amount in month. But as a poor freelance and outsource its really impossible to buy sell dollar through Dealer and Money exchanges authorized by Bangladesh Bank. Bank don’t allow low amount and requires high fees. So we are the site just help them to sell their dollar and take BDT instant.
+              You can trust us 100% to convert your currency to other currency or USD to BDT.
+              </p>
+              <div style="margin-top: 20px">
+                <span class="trusted-title">Phone:</span><span class="trusted-num">017543784</span><br>
+                <span class="trusted-title">Email:</span><span class="trusted-num">Biai@gmail.com</span>
+              </div>  
+            </div>  
+        </div>
+    </div>
+ </div>
+</section>
+
+{% endblock %}
+
+{% block page_related_footer %}
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+      $('.exchange-menu').addClass('active-class')
+      $(".exchange-menu-mobile").addClass('mobile-class-active')
+
+      $(".first-list").click(function(){
+
+        $.ajax({
+          url : "{% url 'get_rate' %}",
+          data : {
+            exchange_obj_id : $(this).data('id')
+          },
+          success : function(data){
+            console.log("success", data)
+            var htmlstring = "";
+            if(data.length > 0)
+            {
+
+              for (i =0; i < data.length; i++){
+                if(data[i].is_available == true){
+                  htmlstring += '<li class="second-list" data-name="'+ data[i].to_PM__name+'" data-price="'+ data[i].rate+'">'
+                  +'<img class="second-list-img" src="/media/'+ data[i].to_PM__image+'">'
+                  +'<span class="second-list-text">'+ data[i].to_PM__name+'</span>'
+                  +'</li>'
+                }
+              }
+
+            }else{
+              htmlstring += '<p class="No-Exchange-Found">No Exchange Found</p>'
+            }
+
+            $(".second-ul-list").html(
+                htmlstring
+              )
+          },
+          error : function(data){
+            console.log("error", data)
+          }
+        })
+        
+      })
+
+      {% if request.GET.tab == 'exchanges' %}
+          $('.calculator-title').trigger('click')
+      {% endif %}      
+      
+      
+    })
+  </script>
+{% endblock page_related_footer %}
