@@ -102,7 +102,6 @@
  <div class="container main-body-container">
     <div class="row">
         <div class="col-sm-12">
-          <h1>{{count}}</h1>
             <p class="exchange-main-titel main-page-title">Biai Exchanges Rate: <span class="first-chang-title">.....</span> to 
             <span class="second-chang-title">.....</span></p>
             <div class="col-sm-9 exchange-calculator-body">
@@ -117,7 +116,7 @@
                             {% for allItem in allItems %}
                               <form method="post">                            
                                 <li class="first-list" data-id="{{allItem.id}}" data-name="{{allItem.name}}" data-price="{{allItem.price}}">
-                                    <img class="first-list-img" src="{{ allItem.image.url }}"">
+                                    <img class="first-list-img" src="{{ allItem.image.url }}">
                                     <span class="first-list-text">{{allItem.name}}</span>
                                 </li>
                                 <input type="hidden" name="{{allItem.name}}">
@@ -132,7 +131,7 @@
                       <div class="not-allow-title remove-the-shadow"></div>
                         <ul class="second-ul-list">
                               {% for allItem in allItems %}
-                                  <li class="second-list" data-name="{{allItem.name}}" data-price="{{allItem.price}}">
+                                  <li class="second-list" data-id="{{allItem.id}}" data-name="{{allItem.name}}" data-price="{{allItem.price}}">
                                   	<img class="second-list-img" src="{{allItem.image.url}}">
                                   	<span class="second-list-text">{{allItem.name}}</span>
                                   </li>
@@ -205,12 +204,12 @@
                   {% for Transaction in TransactionRequest %}
                     <tr class="exchange-table-row">
                       <td>
-                      	<!--<img class="first-list-img" src="{% static 'img/perfect.png' %}">-->
+                      	<img class="first-list-img" src="{{ Transaction.sendFrom.image.url }}">
                       	<span class="first-list-text">{{Transaction.sendFrom}}</span>
                       </td>
                       <td><span class="table-list-text">{{Transaction.sendAmount}}</span></td>
                       <td>
-                      	<!--<img class="second-list-img" src="{% static 'img/Rocket.png' %}">-->
+                      	<img class="second-list-img" src="{{ Transaction.receiveFrom.image.url }}">
                       	<span class="second-list-text">{{Transaction.receiveFrom}}</span>
                       </td> 
                       <td><span class="table-list-text">{{Transaction.receiveAmount}}</span></td>
@@ -270,7 +269,7 @@
 
               for (i =0; i < data.length; i++){
                 if(data[i].is_available == true){
-                  htmlstring += '<li class="second-list" data-name="'+ data[i].to_PM__name+'" data-price="'+ data[i].rate+'">'
+                  htmlstring += '<li class="second-list" data-id="'+ data[i].to_PM__id+'" data-name="'+ data[i].to_PM__name+'" data-price="'+ data[i].rate+'">'
                   +'<img class="second-list-img" src="/media/'+ data[i].to_PM__image+'">'
                   +'<span class="second-list-text">'+ data[i].to_PM__name+'</span>'
                   +'</li>'

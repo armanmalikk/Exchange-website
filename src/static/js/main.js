@@ -69,6 +69,7 @@ $(document).ready(function(){
     /////////////////////click the first list
     $(".first-list").click(function(){
     	firstAttrName = $(this).attr("data-name")
+      firstAttrId = $(this).attr("data-id")
       firstPrice = $(this).attr("data-price")
     	getImg1 = $('.first-list-img',this).attr("src")
     	$(".first-chang-title").html(firstAttrName)	
@@ -78,6 +79,7 @@ $(document).ready(function(){
     /////////////////////click the second list
     $(document).on('click', '.second-list' ,function(){ 
       secondAttrName = $(this).attr("data-name")
+      secondAttrId = $(this).attr("data-id")
       secondPrice = $(this).attr("data-price")
       getImg2 = $('.second-list-img',this).attr("src")
       $(".second-chang-title").html(secondAttrName)
@@ -108,8 +110,8 @@ $(document).ready(function(){
 
             $(".form-send-amount").val(formFistValue)
             $(".form-receive-amount").val(formFinalValue)
-            $(".form-send-name").val(firstAttrName)
-            $(".form-receive-name").val(secondAttrName)
+            $(".form-send-name").val(firstAttrId)
+            $(".form-receive-name").val(secondAttrId)
         })
 
 

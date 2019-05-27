@@ -21,10 +21,11 @@ class ExchangeRateAdmin(admin.ModelAdmin):
 
 class TransactionFormAdmin(admin.ModelAdmin):
 	fieldsets = [
-		("Transaction Rate", {"fields": ["name", "email","phone","sendAmount","sendFrom","receiveAmount","receiveFrom","transaction_at","status"]}),
+		("Transaction Rate", {"fields": ["name", "email","phone","sendAmount","sendFrom","receiveAmount","receiveFrom","status"]}),
 	]
 	list_display = ("name", "email","phone","sendAmount","sendFrom","receiveAmount","receiveFrom","transaction_at","status")	
 	list_editable = ("status",)
+	# readonly_fields = ['transaction_at', ]
 	
 
 # Register your models here.

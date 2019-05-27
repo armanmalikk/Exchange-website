@@ -48,7 +48,7 @@ def get_rate(request):
 	this_payment_method = get_object_or_404(PaymentMethod, id=this_obj_id)
 	print(this_payment_method)
 
-	payment = ExchangeRate.objects.filter(from_PM = this_payment_method).values('to_PM', 'rate', 'is_available','to_PM__name','to_PM__image','to_PM__available_amount')
+	payment = ExchangeRate.objects.filter(from_PM = this_payment_method).values('to_PM', 'to_PM__id', 'rate', 'is_available','to_PM__name','to_PM__image','to_PM__available_amount')
 	payment_method = list(payment)
 
 	return JsonResponse(payment_method, safe=False)
