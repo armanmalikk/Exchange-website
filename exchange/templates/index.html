@@ -9,6 +9,22 @@
        <div>
             <i class="far fa-times-circle popup-close"></i>
        </div>
+       <div class="error-box">
+          {% if form.errors %}
+              {% for field in form %}
+                  {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                  {% endfor %}
+              {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div  style="width:261px" class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+          {% endif %}
+       </div> 
        <table style="width:100%" class="popup-main-table">
 	        <tr class="popup-table-row1">
 	          <th><span class="popup-table-title">Send Amount</span></th>
@@ -245,6 +261,11 @@
  </div>
 </section>
 
+
+
+
+
+
 {% endblock %}
 
 {% block page_related_footer %}
@@ -290,12 +311,57 @@
         })
         
       })
+  
 
-      {% if request.GET.tab == 'exchanges' %}
-          $('.calculator-title').trigger('click')
-      {% endif %}      
+      {% if has_form_error %}
+
+        $(".calculator-title").removeClass("popup-click")
+
+        $(".error-box").css("display","block")
+
+        $(".confirm-payment").addClass('online-the-popup')
+
+        console.log("{{form_value.sendFrom}}")
+
+        $( ".first-list" ).each(function() {
+           if($(this).attr("data-name") == "{{form_value.sendFrom}}"){
+              $(this).trigger( "click" )
+           } 
+        });
+
+        $( ".second-list" ).each(function() {
+           if($(this).attr("data-name") == "{{form_value.receiveFrom}}"){
+              $(this).trigger( "click" )
+           } 
+        });
+
+        $(".online-the-popup").trigger( "click" )
+        $(".popup-first-value").html("{{ form_value.sendAmount }}")
+        $(".popup-second-value").html("{{ form_value.receiveAmount }}")
+          
+
+      {% endif %}  
+
+      
+
+      {% if form_save_now %}
+
+          $(".main-page-title").addClass("popup-click")
+          $('.popup-click').trigger('click')
+
+      {% endif %}
+
+
+      //{% if request.GET.tab == 'exchanges' %}
+       //   $('.popup-click').trigger('click')
+      //{% endif %}   
       
       
     })
+
+
   </script>
+
+
+
 {% endblock page_related_footer %}

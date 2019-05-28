@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    
+
+  
 	//side menu for mobile
 	$("#side-menu-button").click(function(){
       $('#side-menu').css("width","250px");
@@ -24,6 +25,8 @@ $(document).ready(function(){
     $(".popup-close").click(function(){
     	$("body").css("overflow","auto")
     	$("#onlick-traing-fixed-body").css("display","none")
+      $(".first-list").removeClass("active-li")
+      $(".error-box").css("display","none")
     })
 
 
@@ -32,6 +35,7 @@ $(document).ready(function(){
     	$(".first-list").removeClass("active-li")
     	$(this).addClass("active-li")
     })
+
 
 	///////////////////////////////////////click the ul li 
     $(document).on('click', '.second-list' ,function(){ 
@@ -52,18 +56,19 @@ $(document).ready(function(){
      var getImg1="";
      var getImg2="";
 
-     var formFistValue = "1"
-     var formFinalValue = "2"
-
+     var formFistValue = 1
+     var formFinalValue = 0
+     
 
     /////////////////////input keyup
-    $(".calculator-input").change(function(){
+    $(".calculator-input").keyup(function(){
     	firstInput = $(this).val()
 
-        formFistValue =  firstInput
+        formFistValue =  parseInt(firstInput)
 
-        finalAmount = (firstInput*secondPrice).toFixed(1) 
+        finalAmount = firstInput*secondPrice 
         $(".receive-amount-text").html(finalAmount)
+
     }) 
     
     /////////////////////click the first list
@@ -83,9 +88,8 @@ $(document).ready(function(){
       secondPrice = $(this).attr("data-price")
       getImg2 = $('.second-list-img',this).attr("src")
       $(".second-chang-title").html(secondAttrName)
-      finalAmount = (firstInput*secondPrice).toFixed(1) 
+      finalAmount = firstInput*secondPrice
 
-      formFinalValue = finalAmount
 
       $(".receive-amount-text").html(finalAmount)
       console.log(secondPrice)
@@ -93,6 +97,7 @@ $(document).ready(function(){
       $(".confirm-payment").addClass("online-the-popup")
 
     })
+
 
 
     ///////////////////////////////////////////////////////click the popup function
@@ -108,18 +113,21 @@ $(document).ready(function(){
 
             /////////////////////////////////////////////////////////form
 
+            console.log($.type(formFistValue));
+            console.log($.type(finalAmount));
+
+
             $(".form-send-amount").val(formFistValue)
-            $(".form-receive-amount").val(formFinalValue)
+            $(".form-receive-amount").val(finalAmount)
             $(".form-send-name").val(firstAttrId)
             $(".form-receive-name").val(secondAttrId)
         })
 
-
-        $('.calculator-title').click(function(e){
+        $(document).on('click', '.popup-click' ,function(){
 
               swal({
-                title: "Auto close alert!",
-                text: "I will close in 2 seconds.",
+                title: "Successful!!!",
+                text: "Your exchange send",
                 icon: "success",
                 timer: 2000
               });    
