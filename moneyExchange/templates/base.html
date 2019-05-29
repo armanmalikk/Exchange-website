@@ -50,9 +50,9 @@
 	        <span><a href="{% url 'exchange' %}" class="img-link"><img src="{% static 'img/logo.png' %}" id="main-logo"></a></span> 
 	        <ul class="navbar-nav">
 	          <li><a href="{% url 'exchange' %}" class="webmenu-class exchange-menu">Exchange</a></li>
-	          <li><a href="{% url 'terms' %}" class="webmenu-class tc-menu">T & C</a></li>
+	          <li><a href="{% url 'terms_main:terms' %}" class="webmenu-class tc-menu">T & C</a></li>
             {% if user.is_authenticated %}
-	             <li><a href="{% url 'contact' %}" class="webmenu-class contact-menu">Contact</a></li>
+	             <li><a href="{% url 'contact_main:contact' %}" class="webmenu-class contact-menu">Contact</a></li>
             {% endif %}   
 	        </ul>
 	    </nav>
@@ -60,9 +60,9 @@
         <div id="side-menu" class="side-nav">
           <a class="btn-close" onclick="closeSlideMenu()" id="close-buttion-top">&times;</a>
           <a href="{% url 'exchange' %}" class="mobile-class exchange-menu-mobile">Exchange</a>
-          <a href="{% url 'terms' %}" class="mobile-class tc-menu-mobile">T & C</a>
+          <a href="{% url 'terms_main:terms' %}" class="mobile-class tc-menu-mobile">T & C</a>
           {% if user.is_authenticated %}
-            <a href="{% url 'contact' %}" class="mobile-class contact-menu-mobile">Contact</a>
+            <a href="{% url 'contact_main:contact' %}" class="mobile-class contact-menu-mobile">Contact</a>
           {% endif %}  
         </div>
     </section>
